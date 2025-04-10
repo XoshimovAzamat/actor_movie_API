@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Actors(models.Model):
     name = models.CharField(max_length=50)
@@ -30,3 +33,10 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+class CommitMovie(models.Model):
+    title = models.TextField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    create_ed = models.DateField(auto_now_add=True)
+    update_ed = models.DateTimeField(auto_now=True)
