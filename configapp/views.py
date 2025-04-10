@@ -19,6 +19,7 @@ class ActorApi(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(data=serializer.data, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=400)
 
 
 class MovieApi(APIView):
@@ -32,5 +33,5 @@ class MovieApi(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(data=serializer.data, status=status.HTTP_200_OK)
-
+        return Response(data=serializer.errors, status=400)
 
